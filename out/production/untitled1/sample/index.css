@@ -1,0 +1,17 @@
+.button{
+    -fx-background-color: #19376D;
+    -fx-background-radius: 5px;
+    -fx-text-fill: aliceblue
+;
+}
+.button{
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #19376D;
+    -fx-border-radius: 5px;
+    -fx-text-fill: #19376D
+;
+}
+.text-field{
+    -fx-background-color: transparent;
+    -fx-border-width: .20px .10px .20px .20px ;
+}
