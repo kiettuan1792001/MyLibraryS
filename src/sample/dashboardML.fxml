@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -13,8 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="200.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
@@ -143,7 +143,19 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label text="Sách nổi bật" />
+            <Label text="Sách nổi bật">
+               <font>
+                  <Font name="Averta-Bold" size="14.0" />
+               </font></Label>
+            <ScrollPane focusTraversable="false" prefHeight="165.0" prefWidth="782.0" styleClass="transparent" stylesheets="@../css/style.css">
+               <content>
+                  <HBox fx:id="cardLayout" alignment="CENTER_LEFT" prefHeight="148.0" prefWidth="783.0" spacing="16.0" styleClass="transparent" stylesheets="@../css/style.css">
+                     <padding>
+                        <Insets left="16.0" />
+                     </padding>
+                  </HBox>
+               </content>
+            </ScrollPane>
          </children>
          <padding>
             <Insets bottom="16.0" left="16.0" right="16.0" top="16.0" />

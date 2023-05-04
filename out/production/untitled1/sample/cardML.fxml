@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="box" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="245.0" spacing="8.0" style="-fx-background-color: #E1E1E1;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CardController">
+   <children>
+      <ImageView fx:id="bookImage" fitHeight="106.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/01.png" />
+         </image>
+      </ImageView>
+      <VBox prefHeight="120.0" prefWidth="142.0">
+         <children>
+            <Label fx:id="bookName" prefHeight="54.0" prefWidth="135.0" text="Lập trình hướng&#10;đối tượng Java">
+               <font>
+                  <Font name="Averta-Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="authorName" layoutX="10.0" layoutY="10.0" prefHeight="54.0" prefWidth="110.0" text="Lập trình hướng&#10;đối tượng Java" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets left="8.0" />
+   </padding>
+   <cursor>
+      <Cursor fx:constant="DEFAULT" />
+   </cursor>
+   <styleClass>
+      <String fx:value="shadow" />
+      <String fx:value="radius_box" />
+   </styleClass>
+</HBox>

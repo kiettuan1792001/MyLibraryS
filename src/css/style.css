@@ -1,3 +1,9 @@
-.password-field{
-
+.shadow{
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+.radius_box{
+    -fx-background-radius: 15px ;
 }
