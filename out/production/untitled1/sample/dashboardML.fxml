@@ -149,7 +149,7 @@
                </font></Label>
             <ScrollPane focusTraversable="false" prefHeight="165.0" prefWidth="782.0" styleClass="transparent" stylesheets="@../css/style.css">
                <content>
-                  <HBox fx:id="cardLayout" alignment="CENTER_LEFT" prefHeight="148.0" prefWidth="783.0" spacing="16.0" styleClass="transparent" stylesheets="@../css/style.css">
+                  <HBox fx:id="cardLayout" alignment="CENTER_LEFT" prefHeight="148.0" prefWidth="972.0" spacing="16.0" styleClass="transparent" stylesheets="@../css/style.css">
                      <padding>
                         <Insets left="16.0" />
                      </padding>

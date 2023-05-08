@@ -40,22 +40,39 @@ public class Controller implements Initializable {
 
     private List<Book> recentlyAdded(){
         List<Book> ls = new ArrayList<>();
-
-//        Them sach vao dashboard
+        int n = 3;
         Book book = new Book();
         book.setImageSrc("/img/01.png");
         book.setName("Lập trình hướng \nđối tượng Java");
         book.setAuthor("123");
         ls.add(book);
+        for (int i = 1; i< n; i++){
+            book = new Book();
+            char check = (char)(i +'0');
+            book.setImageSrc("/img/0" + check+ ".png");
+            book.setName("Lập trình hướng \nđối tượng Java");
+            book.setAuthor("123");
+            ls.add(book);
+        }
 
-        book = new Book();
-        book.setImageSrc("/img/01.png");
-        book.setName("123456");
-        book.setAuthor("123");
-        ls.add(book);
+//        Them sach vao dashboard
+//        ;
+//
+//        book = new Book();
+//        book.setImageSrc("/img/02.png");
+//        book.setName("Giáo trình lập trình hướng đối tượng với Java");
+//        book.setAuthor("Trần Thị Minh Châu \nNguyễn Việt Hà");
+//        ls.add(book);
+//
+//        book = new Book();
+//        book.setImageSrc("/img/03.png");
+//        book.setName("Giáo trình C++ và lập trình hướng đối tượng");
+//        book.setAuthor("GS. Phạm Văn Ất \nLê Trường Thông");
+//        ls.add(book);
 
 
         return ls;
     }
+
 
 }
