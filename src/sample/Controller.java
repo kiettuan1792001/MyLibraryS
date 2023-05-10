@@ -43,13 +43,6 @@ public class Controller implements Initializable {
 
     private List<Book> recentlyAdded(){
         List<Book> books = new ArrayList<>();
-        String name = "";
-        int ID = 0;
-        String author = "";
-        String category = "";
-        String details = "";
-        String imageSrc = "";
-
         int n = 6;
         try {
             Book book = new Book();
@@ -59,101 +52,37 @@ public class Controller implements Initializable {
                 }
                 char check = (char) (i + '0');
                 book.setImageSrc("/img/0" + check + ".png");
-//                book.setName("check");
                 File file = new File("src/data/Data" + check + ".txt");
                 Scanner myReader = new Scanner(file);
-
-//                book.setName(myReader.nextLine());
                 int count = 0;
                 while (myReader.hasNextLine() == true) {
                     count++;
-                    //System.out.println(count);
                     String data = myReader.nextLine();
-                    //System.out.println(data.split(": ", 2)[1]);
                     switch (count) {
                         case 1:
-                            name = data.split(": ", 2)[1];
                             book.setName(data.split(": ", 2)[1]);
                             break;
                         case 2:
-                            ID = Integer.parseInt(data.split(": ", 2)[1]);
                             book.setID(Integer.parseInt(data.split(": ", 2)[1]));
                             break;
                         case 3:
-                            author = data.split(": ", 2)[1];
                             book.setAuthor(data.split(": ", 2)[1]);
                             break;
                         case 4:
-                            category = data.split(": ", 2)[1];
-//                            book.setCategory(data.split(": ", 2)[1]);
+                            book.setCategory(data.split(": ", 2)[1]);
                             break;
                         case 5:
-                            details = data.split(": ", 2)[1];
                             book.setDetails(data.split(": ", 2)[1]);
                             break;
                         default:
                             break;
                     }
                 }
-//                Book book = new Book(name, author, ID, imageSrc, category, details);
                 books.add(book);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-//        book.setImageSrc("/img/01.png");
-//        book.setName("123456");
-//        book.setAuthor("123");
-//        books.add(book);
         return books;
-    }
-    public static void list_book(List<Book> books){
-        String name = "";
-        int ID = 0;
-        String author = "";
-        String category = "";
-        String details = "";
-        String ImageSrc = "";
-        int n = 6;
-        try {
-            for (int i = 1; i <= n; i++) {
-                char check = (char) (i + '0');
-                File file = new File("/data/Data" + check + ".txt");
-                Scanner myReader = new Scanner(file);
-//                System.out.println(myReader.hasNextLine());
-                int count = 0;
-                while (myReader.hasNextLine()) {
-                    count++;
-                    //System.out.println(count);
-                    String data = myReader.nextLine();
-                    //System.out.println(data.split(": ", 2)[1]);
-                    switch (count) {
-                        case 1:
-                            name = data.split(": ", 2)[1];
-                            break;
-                        case 2:
-                            ID = Integer.parseInt(data.split(": ", 2)[1]);
-                            break;
-                        case 3:
-                            author = data.split(": ", 2)[1];
-                            break;
-                        case 4:
-                            category = data.split(": ", 2)[1];
-                            break;
-                        case 5:
-                            details = data.split(": ", 2)[1];
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                ImageSrc = "/img/0" + check + ".png";
-                books.add(new Book(name, author, ID, category, details, ImageSrc));
-                myReader.close();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 }
