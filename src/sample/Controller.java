@@ -6,11 +6,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.HBox;
 import model.Book;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class Controller implements Initializable {
 
@@ -38,24 +41,24 @@ public class Controller implements Initializable {
 
     }
 
-    private List<Book> recentlyAdded(){
-        List<Book> ls = new ArrayList<>();
 
-//        Them sach vao dashboard
-        Book book = new Book();
-        book.setImageSrc("/img/01.png");
-        book.setName("Lập trình hướng \nđối tượng Java");
-        book.setAuthor("123");
-        ls.add(book);
+        private List<Book> recentlyAdded(){
+            List<Book> ls = new ArrayList<>();
+//          Them sach vao dashboard
+            Book book = new Book();
+            book.setImageSrc("/img/01.png");
+            book.setName("Lập trình hướng \nđối tượng Java");
+            book.setAuthor("123");
+            ls.add(book);
 
-        book = new Book();
-        book.setImageSrc("/img/01.png");
-        book.setName("123456");
-        book.setAuthor("123");
-        ls.add(book);
+            book = new Book();
+            book.setImageSrc("/img/01.png");
+            book.setName("123456");
+            book.setAuthor("123");
+            ls.add(book);
 
 
-        return ls;
+            return ls;
+        }
+
     }
-
-}

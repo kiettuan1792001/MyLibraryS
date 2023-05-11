@@ -6,13 +6,18 @@ public class Book {
     private int ID;
     private String ImageSrc;
     private String category;
+    private String details;
 
-    public String getImageSrc() {
-        return ImageSrc;
+    public Book(String name, String author, int ID, String imageSrc, String category, String details) {
+        this.name = name;
+        this.author = author;
+        this.ID = ID;
+        ImageSrc = imageSrc;
+        this.category = category;
+        this.details = details;
     }
 
-    public void setImageSrc(String imageSrc) {
-        ImageSrc = imageSrc;
+    public Book() {
     }
 
     public String getName() {
@@ -37,5 +42,29 @@ public class Book {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public String getImageSrc() {
+        return ImageSrc;
+    }
+
+    public void setImageSrc(String imageSrc) {
+        ImageSrc = imageSrc;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
     }
 }
