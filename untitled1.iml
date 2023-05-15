@@ -25,5 +25,15 @@
     </orderEntry>
     <orderEntry type="library" exported="" name="lib" level="project" />
     <orderEntry type="library" name="jfx" level="project" />
+    <orderEntry type="library" name="ojdbc14-1.0" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Program Files/Java/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

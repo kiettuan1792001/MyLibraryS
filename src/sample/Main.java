@@ -1,5 +1,6 @@
 package sample;
 
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,8 +11,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("dashboardML.fxml"));
-        primaryStage.setTitle("Hello World");
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        primaryStage.setTitle("Library System");
         primaryStage.setScene(new Scene(root, 960, 540));
         primaryStage.show();
     }

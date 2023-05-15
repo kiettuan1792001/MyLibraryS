@@ -14,12 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import model.Book;
-import javafx.scene.input.MouseEvent;
 
-import java.awt.*;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class CardController {
     @FXML
@@ -46,11 +42,12 @@ public class CardController {
         authorName.setText(book.getAuthor());
         box.setStyle("-fx-background-color: #ffffff");
     }
+
     @FXML
     private void view(ActionEvent event){
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("view.fxml"));
+            root = FXMLLoader.load(getClass().getResource("CardDetail.fxml"));
             Stage stage = new Stage();
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 960, 540);

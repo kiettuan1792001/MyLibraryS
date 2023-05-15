@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CardDetailController">
+   <children>
+       
+      <Button fx:id="back" layoutX="25.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="76.0" text="Back" />
+      <ImageView fitHeight="332.0" fitWidth="194.0" layoutX="63.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/01.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="281.0" layoutY="52.0" prefHeight="137.0" prefWidth="624.0" text="C++ &amp; Lập trình hướng đối tượng" wrapText="true">
+         <font>
+            <Font name="Averta-Bold" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="281.0" layoutY="189.0" prefHeight="49.0" prefWidth="624.0" text="GS.Phạm Văn Ất, Lê Tường Thông" wrapText="true">
+         <font>
+            <Font name="Averta-Semibold" size="20.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="49.0" fitWidth="200.0" layoutX="281.0" layoutY="244.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/vecteezy_5-star-rating-review-star-png-transparent_9663928_660.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="281.0" layoutY="306.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="126.0" text="Mượn sách" />
+      <ScrollPane layoutX="63.0" layoutY="361.0" prefHeight="162.0" prefWidth="869.0" style="-fx-background-color: transparent; -fx-background-radius: 15px;">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="867.0" style="-fx-background-color: #F5F5FB; -fx-background-radius: 15px;" styleClass="radius_box" stylesheets="@../css/style.css">
+               <children>
+                  <Label layoutX="14.0" layoutY="14.0" text="Label" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

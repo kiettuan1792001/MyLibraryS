@@ -17,7 +17,7 @@ import model.Book;
 
 import java.io.IOException;
 
-public class ViewController {
+public class CardDetailController {
 
     @FXML
     private Button back;
