@@ -62,7 +62,7 @@ public class AdminPortalController implements Initializable {
 
         // CHECK IF THERE ARE FIELDS THAT EMPTY
         if (admin_username.getText().isEmpty() || admin_password.getText().isEmpty()) {
-            errorMessage("Please fill all blank fields");
+            errorMessage("Điền thông tin tài khoản/mật khẩu");
         } else {
             String selectData = "SELECT * FROM admin WHERE username = ? and password = ?"; // MAKE SURE TO CHECK IF THE NAME OF YOUR TABLE AND COLUMNS ARE MATCH
 
@@ -78,7 +78,7 @@ public class AdminPortalController implements Initializable {
                 if (result.next()) {
                     // IF CORRECT USERNAME AND PASSWORD
 
-                    successMessage("Login Successfully!");
+                    successMessage("Đăng nhập thành công!");
 
                     // LETS CREATE YOUR MAIN FORM
                     // LINK YOUR ADMIN MAIN FORM
@@ -95,7 +95,7 @@ public class AdminPortalController implements Initializable {
                 } else {
                     // IF INCORRECT USERNAME OR PASSWORD
 
-                    errorMessage("Incorrect Username/Password");
+                    errorMessage("Nhập lại tên tài khoản/mật khẩu");
                 }
 
             } catch (Exception e) {

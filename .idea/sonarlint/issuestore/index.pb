@@ -1,6 +1,4 @@
 
-C
-src/model/Book.java,a\2\a24bd109dad78498e445aa05f6cbbfb4e30a228b
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302

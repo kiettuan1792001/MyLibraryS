@@ -2,6 +2,7 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.Size;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -61,7 +62,7 @@ public class FXMLDocumentController implements Initializable {
 
         // CHECK IF THERE ARE FIELDS THAT EMPTY
         if (user_username.getText().isEmpty() || user_password.getText().isEmpty()) {
-            errorMessage("Please fill all blank fields");
+            errorMessage("Điền thông tin tài khoản/mật khẩu");
         } else {
             String selectData = "SELECT * FROM user WHERE user_usernameID = ? and user_passwordID = ?"; // MAKE SURE TO CHECK IF THE NAME OF YOUR TABLE AND COLUMNS ARE MATCH
 
@@ -77,7 +78,7 @@ public class FXMLDocumentController implements Initializable {
                 if (result.next()) {
                     // IF CORRECT USERNAME AND PASSWORD
 
-                    successMessage("Login Successfully!");
+                    successMessage("Đăng nhập thành công!");
 
                     // LETS CREATE YOUR MAIN FORM
                     // LINK YOUR ADMIN MAIN FORM
@@ -94,7 +95,7 @@ public class FXMLDocumentController implements Initializable {
                 } else {
                     // IF INCORRECT USERNAME OR PASSWORD
 
-                    errorMessage("Incorrect Username/Password");
+                    errorMessage("Nhập lại tên tài khoản/mật khẩu");
                 }
 
             } catch (Exception e) {

@@ -15,3 +15,7 @@
 .backgroundColor{
     -fx-background-color: linear-gradient(to left, #062c80,#041A4EFF);
 }
+.input {
+    font: small-caption;
+    font-size: 16px;
+}
