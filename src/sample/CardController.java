@@ -32,7 +32,7 @@ public class CardController {
     private ImageView bookImage;
     @FXML
     private BorderPane bp;
-
+    private Book bookCheck;
     private String[] colors = {"B9E5FF"};
 
     public void setData(Book book){
@@ -41,19 +41,29 @@ public class CardController {
         bookName.setText(book.getName());
         authorName.setText(book.getAuthor());
         box.setStyle("-fx-background-color: #ffffff");
+        bookCheck = book;
     }
 
     @FXML
     private void view(ActionEvent event){
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("CardDetail.fxml"));
-            Stage stage = new Stage();
-            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 960, 540);
-            stage.setScene(scene);
-            stage.setTitle("Book Details");
-            stage.show();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("CardDetail.fxml"));
+            Parent tableViewParent = loader.load();
+            Scene tableViewScene = new Scene(tableViewParent);
+            CardDetailController controller = loader.getController();
+            controller.initData(bookCheck);
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(tableViewScene);
+            window.show();
+//            root = FXMLLoader.load(getClass().getResource("CardDetail.fxml"));
+//            Stage stage = new Stage();
+//            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+//            Scene scene = new Scene(root, 960, 540);
+//            stage.setScene(scene);
+//            stage.setTitle("Book Details");
+//            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

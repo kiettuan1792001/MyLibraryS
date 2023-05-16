@@ -17,8 +17,10 @@ import javafx.stage.Stage;
 import model.Book;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class CardDetailController {
+public class CardDetailController implements Initializable {
     @FXML
     private ImageView detailImage;
     @FXML
@@ -27,6 +29,18 @@ public class CardDetailController {
     private Label detailAuthor;
     @FXML
     private Label detailDetail;
+    private Book bookSelected;
+
+    public void initData(Book book) {
+        bookSelected = book;
+        detailName.setText(bookSelected.getName());
+        detailAuthor.setText(bookSelected.getAuthor());
+        detailDetail.setText(bookSelected.getDetails());
+        detailImage.setImage(new Image(bookSelected.getImageSrc()));
+    }
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }
 
     @FXML
     void back(ActionEvent event) {
