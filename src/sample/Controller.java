@@ -61,6 +61,8 @@ public class Controller implements Initializable {
     @FXML
     private Button logout;
     @FXML
+    private Button filter;
+    @FXML
     private void home(MouseEvent event){
         book_result = new ArrayList<>(searchBook(" "));
         System.out.println(book_result.size());
@@ -79,23 +81,23 @@ public class Controller implements Initializable {
         }
         bp.setCenter(vbox);
         label.setText("Sách nổi bật");
+        classify.setValue("Tất cả");
     }
     @FXML
     private void bookshelf(MouseEvent event){
         loadPage("bookshelf");
+        classify.setValue("Tất cả");
     }
     @FXML
     private void love(MouseEvent event){
         loadPage("love");
+        classify.setValue("Tất cả");
     }
     @FXML
     private void history(MouseEvent event){
         loadPage("history");
+        classify.setValue("Tất cả");
     }
-    //    @FXML
-//    private void view(MouseEvent event){
-//        loadPage("view");
-//    }
     private void loadPage(String page){
         Parent root = null;
         try {
@@ -126,6 +128,7 @@ public class Controller implements Initializable {
         bp.setCenter(vbox);
         label.setText("Kết quả tìm kiếm cho: '" + text + "'");
         search_text.setText("");
+        classify.setValue("Tất cả");
     }
     @FXML
     private void logout(ActionEvent event){
@@ -165,6 +168,37 @@ public class Controller implements Initializable {
                 "Luật",
                 "Y học"
         );
+        filter.setOnAction(e -> filterBook(classify.getValue().toString()));
+    }
+    private void filterBook(String text){
+        recentlyAdded = new ArrayList<>(recentlyAdded());
+        List<Book> book_filter = new ArrayList<>();
+        if (text.equals("Tất cả")) {
+            book_filter = recentlyAdded;
+        } else {
+            for (Book book : recentlyAdded) {
+                if (book.getCategory().toLowerCase().contains(text.toLowerCase())) {
+                    book_filter.add(book);
+                }
+            }
+        }
+        cardLayout.getChildren().clear();
+        try {
+            for (int i=0; i < book_filter.size(); i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("cardML.fxml"));
+                HBox cardBox = fxmlLoader.load();
+                CardController cardController = fxmlLoader.getController();
+                cardController.setData(book_filter.get(i));
+                cardLayout.getChildren().add(cardBox);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (text.equals("Tất cả"))
+            label.setText("Sách nổi bật");
+        else
+            label.setText("Các sách thuộc thể loại: '" + text + "'");
     }
 
     private List<Book> recentlyAdded(){
