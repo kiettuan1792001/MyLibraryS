@@ -56,7 +56,7 @@ public class CardDetailController implements Initializable {
             stage = (Stage)((Node)event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 960, 540);
             stage.setScene(scene);
-            stage.setTitle("Book Details");
+            stage.setTitle("Library System");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

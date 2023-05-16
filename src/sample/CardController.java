@@ -56,6 +56,7 @@ public class CardController {
             controller.initData(bookCheck);
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(tableViewScene);
+            window.setTitle("Book Details");
             window.show();
 //            root = FXMLLoader.load(getClass().getResource("CardDetail.fxml"));
 //            Stage stage = new Stage();

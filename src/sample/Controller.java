@@ -3,11 +3,15 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 import model.Book;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
@@ -46,12 +50,16 @@ public class Controller implements Initializable {
     @FXML
     private Button love;
     @FXML
+    private ComboBox classify;
+    @FXML
     private Button history;
 
     @FXML
     private VBox vbox;
     @FXML
     private Label label;
+    @FXML
+    private Button logout;
     @FXML
     private void home(MouseEvent event){
         book_result = new ArrayList<>(searchBook(" "));
@@ -119,6 +127,21 @@ public class Controller implements Initializable {
         label.setText("Kết quả tìm kiếm cho: '" + text + "'");
         search_text.setText("");
     }
+    @FXML
+    private void logout(ActionEvent event){
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+            Stage stage = new Stage();
+            stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 960, 540);
+            stage.setScene(scene);
+            stage.setTitle("Library System");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         recentlyAdded = new ArrayList<>(recentlyAdded());
@@ -134,6 +157,14 @@ public class Controller implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+//        classify = new ComboBox<>();
+        classify.getItems().addAll(
+                "Tất cả",
+                "Công nghệ",
+                "Kinh tế",
+                "Luật",
+                "Y học"
+        );
     }
 
     private List<Book> recentlyAdded(){
