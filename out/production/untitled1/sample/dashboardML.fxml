@@ -185,7 +185,7 @@
                <font>
                   <Font name="Averta-Bold" size="14.0" />
                </font></Label>
-            <ScrollPane focusTraversable="false" prefHeight="165.0" prefWidth="782.0" styleClass="transparent" stylesheets="@../css/style.css">
+            <ScrollPane fx:id="scroll_book" focusTraversable="false" prefHeight="165.0" prefWidth="782.0" styleClass="transparent" stylesheets="@../css/style.css">
                <content>
                   <HBox fx:id="cardLayout" alignment="CENTER_LEFT" prefHeight="148.0" prefWidth="783.0" spacing="16.0" style="-fx-background-color: #F5F5FB;" stylesheets="@../css/style.css">
                      <padding>

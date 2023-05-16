@@ -6,10 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import model.Book;
@@ -63,6 +60,8 @@ public class Controller implements Initializable {
     @FXML
     private Button filter;
     @FXML
+    private ScrollPane scroll_book;
+    @FXML
     private void home(MouseEvent event){
         book_result = new ArrayList<>(searchBook(" "));
         System.out.println(book_result.size());
@@ -82,6 +81,7 @@ public class Controller implements Initializable {
         bp.setCenter(vbox);
         label.setText("Sách nổi bật");
         classify.setValue("Tất cả");
+        scroll_book.setVisible(true);
     }
     @FXML
     private void bookshelf(MouseEvent event){
@@ -126,7 +126,17 @@ public class Controller implements Initializable {
         }
 
         bp.setCenter(vbox);
-        label.setText("Kết quả tìm kiếm cho: '" + text + "'");
+        if (book_result.size() == 0) {
+            label.setText("Không tìm thấy kết quả nào cho: '" + text + "'");
+            scroll_book.setVisible(false);
+        } else if (text.equals("")){
+            label.setText("Sách nổi bật");
+            scroll_book.setVisible(true);
+        }
+        else {
+            label.setText("Kết quả tìm kiếm cho: '" + text + "'");
+            scroll_book.setVisible(true);
+        }
         search_text.setText("");
         classify.setValue("Tất cả");
     }
@@ -169,6 +179,7 @@ public class Controller implements Initializable {
                 "Y học"
         );
         filter.setOnAction(e -> filterBook(classify.getValue().toString()));
+        scroll_book.setVisible(true);
     }
     private void filterBook(String text){
         recentlyAdded = new ArrayList<>(recentlyAdded());
@@ -199,6 +210,7 @@ public class Controller implements Initializable {
             label.setText("Sách nổi bật");
         else
             label.setText("Các sách thuộc thể loại: '" + text + "'");
+        scroll_book.setVisible(true);
     }
 
     private List<Book> recentlyAdded(){
