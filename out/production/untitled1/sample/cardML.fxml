@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
@@ -18,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="box" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="117.0" prefWidth="300.0" spacing="8.0" style="-fx-background-color: #E1E1E1;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CardController">
+<HBox fx:id="box" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="117.0" prefWidth="300.0" spacing="8.0" style="-fx-background-color: #E1E1E1;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CardController">
    <children>
       <ImageView fx:id="bookImage" fitHeight="106.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -29,16 +22,32 @@
          <children>
             <Label fx:id="bookName" prefHeight="50.0" prefWidth="220.0" text="Lập trình hướng đối tượng Java" wrapText="true">
                <font>
-                  <Font name="Averta-Bold" size="14.0" />
+                  <Font name="Averta-Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="authorName" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="220.0" text="Lập trình hướng đối tượng Java" wrapText="true" />
-            <Button alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#view" text="Xem sách">
+            <Label fx:id="authorName" layoutX="10.0" layoutY="10.0" prefHeight="50.0" prefWidth="213.0" text="Lập trình hướng đối tượng Java" textFill="#838383" wrapText="true">
+               <VBox.margin>
+                  <Insets top="-2.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="-12.0" />
+               </padding></Label>
+            <Button alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#view" style="-fx-background-color: transparent;" text="Xem sách" textFill="#062c80">
                <VBox.margin>
                   <Insets bottom="10.0" right="10.0" />
                </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="17.0" fitWidth="17.0">
+                     <image>
+                        <Image url="@../img/arrow-small-right.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
          </children>
+         <HBox.margin>
+            <Insets top="5.0" />
+         </HBox.margin>
       </VBox>
    </children>
    <padding>
@@ -48,7 +57,6 @@
       <Cursor fx:constant="DEFAULT" />
    </cursor>
    <styleClass>
-      <String fx:value="shadow" />
       <String fx:value="radius_box" />
       <String fx:value="label" />
    </styleClass>
