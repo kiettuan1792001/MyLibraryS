@@ -54,6 +54,7 @@ public class CardController {
             Scene tableViewScene = new Scene(tableViewParent);
             CardDetailController controller = loader.getController();
             controller.initData(bookCheck);
+//            controller.borrow.setText("check");
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
             window.setScene(tableViewScene);
             window.setTitle("Book Details");
