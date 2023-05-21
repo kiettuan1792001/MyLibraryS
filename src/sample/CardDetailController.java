@@ -58,12 +58,15 @@ public class CardDetailController implements Initializable {
     void borrow(ActionEvent event){
         if (borrow.getText().equals("Mượn sách")) {
             borrow.setText("Trả sách");
+            Controller controller = new Controller();
+            controller.recentlyAdded = controller.recentlyAdded();
+            controller.borrowed(bookSelected);
         } else {
             borrow.setText("Mượn sách");
+            Controller controller = new Controller();
+            controller.recentlyAdded = controller.recentlyAdded();
+            controller.give_back(bookSelected);
         }
-        Controller controller = new Controller();
-        controller.recentlyAdded = controller.recentlyAdded();
-        controller.borrowed(bookSelected);
 //        List<Book> book_borrowed = controller.book_borrowed();
 //        for (Book book : book_borrowed) {
 //            if (bookSelected.getID() == book.getID()) {

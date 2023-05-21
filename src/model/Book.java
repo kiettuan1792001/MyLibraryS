@@ -8,9 +8,6 @@ public class Book {
     private String category;
     private String details;
 
-
-    private boolean borrowed;
-
     public Book(String name, String author, int ID, String imageSrc, String category, String details) {
         this.name = name;
         this.author = author;

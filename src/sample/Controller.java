@@ -16,9 +16,7 @@ import javafx.scene.input.MouseEvent;
 import java.beans.EventHandler;
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -36,7 +34,7 @@ public class Controller implements Initializable {
     public List<Book> recentlyAdded;
     public List<Book> borrowed;
     private List<Book> Loved;
-    private List<Book> History;
+    private List<Book> history;
     private List<Book> book_result;
     String text;
     @FXML
@@ -54,7 +52,7 @@ public class Controller implements Initializable {
     @FXML
     private ComboBox classify;
     @FXML
-    private Button history;
+    private Button History;
 
     @FXML
     private VBox vbox;
@@ -68,28 +66,6 @@ public class Controller implements Initializable {
     private ScrollPane scroll_book;
     @FXML
     private void home(MouseEvent event){
-        borrowed = new ArrayList<>(book_borrowed());
-        System.out.println(borrowed.size());
-        cardLayout.getChildren().clear();
-        try {
-            for (int i=0; i < borrowed.size(); i++) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("cardML.fxml"));
-                HBox cardBox = fxmlLoader.load();
-                CardController cardController = fxmlLoader.getController();
-                cardController.setData(borrowed.get(i));
-                cardLayout.getChildren().add(cardBox);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        bp.setCenter(vbox);
-        label.setText("Giá sách của tôi");
-        classify.setValue("Tất cả");
-        scroll_book.setVisible(true);
-    }
-    @FXML
-    private void bookshelf(MouseEvent event){
         book_result = new ArrayList<>(searchBook(" "));
         System.out.println(book_result.size());
         cardLayout.getChildren().clear();
@@ -111,14 +87,53 @@ public class Controller implements Initializable {
         scroll_book.setVisible(true);
     }
     @FXML
+    private void bookshelf(MouseEvent event){
+        borrowed = new ArrayList<>(book_borrowed());
+        System.out.println(borrowed.size());
+        cardLayout.getChildren().clear();
+        try {
+            for (int i=0; i < borrowed.size(); i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("cardML.fxml"));
+                HBox cardBox = fxmlLoader.load();
+                CardController cardController = fxmlLoader.getController();
+                cardController.setData(borrowed.get(i));
+                cardLayout.getChildren().add(cardBox);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        bp.setCenter(vbox);
+        label.setText("Giá sách của tôi");
+        classify.setValue("Tất cả");
+        scroll_book.setVisible(true);
+    }
+    @FXML
     private void love(MouseEvent event){
         loadPage("love");
         classify.setValue("Tất cả");
     }
     @FXML
     private void history(MouseEvent event){
-        loadPage("history");
+        history = new ArrayList<>(book_history());
+        System.out.println(history.size());
+        cardLayout.getChildren().clear();
+        try {
+            for (int i=0; i < history.size(); i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("cardML.fxml"));
+                HBox cardBox = fxmlLoader.load();
+                CardController cardController = fxmlLoader.getController();
+                cardController.setData(history.get(i));
+                cardLayout.getChildren().add(cardBox);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        bp.setCenter(vbox);
+        label.setText("Lịch sử mượn sách");
         classify.setValue("Tất cả");
+        scroll_book.setVisible(true);
     }
     private void loadPage(String page){
         Parent root = null;
@@ -235,19 +250,22 @@ public class Controller implements Initializable {
 
     public List<Book> recentlyAdded(){
         List<Book> books = new ArrayList<>();
-
         try {
-            Stream <Path> files = Files.list(Paths.get("src/data/Raw"));
-            int n = (int) files.count();
+            File path = new File("src/data/Raw");
+            File[] file_list = path.listFiles();
+            int index;
             Book book = new Book();
-            for (int i = 1; i <= n; i++){
-                if (i > 1) {
+            int check = 0;
+            for (File file : file_list){
+                index = Integer.parseInt(file.getName().split("Data")[1].split(".txt")[0]);
+                if (check == 0) {
                     book = new Book();
+                } else {
+                    check++;
                 }
-                char check = (char) (i + '0');
-                book.setImageSrc("/img/0" + check + ".png");
-                File file = new File("src/data/Raw/Data" + check + ".txt");
-                Scanner myReader = new Scanner(file);
+                book.setImageSrc("/img/0" + index + ".png");
+                File file_read = new File("src/data/Raw/Data" + index + ".txt");
+                Scanner myReader = new Scanner(file_read);
                 int count = 0;
                 while (myReader.hasNextLine() == true) {
                     count++;
@@ -281,20 +299,27 @@ public class Controller implements Initializable {
         }
         return books;
     }
-    public List<Book> book_borrowed(){
+    public List <Book> book_history(){
         List<Book> books = new ArrayList<>();
         try {
+            File path = new File("src/data/History");
+            File[] file_list = path.listFiles();
+            int index;
             Book book = new Book();
-            Stream <Path> files = Files.list(Paths.get("src/data/Borrow"));
-            int n = (int) files.count();
-            for (int i = 1; i <= n; i++){
-                if (i > 1) {
+            int check = 0;
+            for (File file : file_list){
+                index = Integer.parseInt(file.getName().split("Data")[1].split(".txt")[0]);
+                if (check == 0) {
                     book = new Book();
+                } else {
+                    check++;
                 }
-                char check = (char) (i + '0');
-                book.setImageSrc("/img/0" + check + ".png");
-                File file = new File("src/data/Borrow/Data" + check + ".txt");
-                Scanner myReader = new Scanner(file);
+                book.setImageSrc("/img/0" + index + ".png");
+                File file_read = new File("src/data/History/Data" + index + ".txt");
+                if(file_read.length() == 0){
+                    continue;
+                }
+                Scanner myReader = new Scanner(file_read);
                 int count = 0;
                 while (myReader.hasNextLine() == true) {
                     count++;
@@ -320,7 +345,65 @@ public class Controller implements Initializable {
                     }
                 }
                 books.add(book);
+                file.exists();
             }
+            path.exists();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
+    public List<Book> book_borrowed(){
+        List<Book> books = new ArrayList<>();
+        try {
+            File path = new File("src/data/Borrow");
+            File[] file_list = path.listFiles();
+            int index;
+            Book book = new Book();
+            int check = 0;
+            for (File file : file_list){
+                index = Integer.parseInt(file.getName().split("Data")[1].split(".txt")[0]);
+                if (check == 0) {
+                    book = new Book();
+                } else {
+                    check++;
+                }
+                book.setImageSrc("/img/0" + index + ".png");
+                File file_read = new File("src/data/Borrow/Data" + index + ".txt");
+                if(file_read.length() == 0){
+                    continue;
+                }
+                Scanner myReader = new Scanner(file_read);
+                int count = 0;
+                while (myReader.hasNextLine() == true) {
+                    count++;
+                    String data = myReader.nextLine();
+                    switch (count) {
+                        case 1:
+                            book.setName(data.split(": ", 2)[1]);
+                            break;
+                        case 2:
+                            book.setID(Integer.parseInt(data.split(": ", 2)[1]));
+                            break;
+                        case 3:
+                            book.setAuthor(data.split(": ", 2)[1]);
+                            break;
+                        case 4:
+                            book.setCategory(data.split(": ", 2)[1]);
+                            break;
+                        case 5:
+                            book.setDetails(data.split(": ", 2)[1]);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                books.add(book);
+                file.exists();
+            }
+            path.exists();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -335,15 +418,14 @@ public class Controller implements Initializable {
                     int index = recentlyAdded.indexOf(book) + 1;
                     InputStream inputStream = new BufferedInputStream(new FileInputStream("src/data/Raw/Data" + index + ".txt"));
                     OutputStream outputStream = new BufferedOutputStream(new FileOutputStream("src/data/Borrow/Data" + index + ".txt"));
-                    OutputStream outputStream1 = new BufferedOutputStream(new FileOutputStream("src/data/History/Data" + index + ".txt"));
                     byte[] buffer = new byte[1024];
                     int lengthRead;
                     while ((lengthRead = inputStream.read(buffer)) > 0){
                         outputStream.write(buffer, 0, lengthRead);
-                        outputStream1.write(buffer, 0, lengthRead);
                         outputStream.flush();
-                        outputStream1.flush();
                     }
+                    outputStream.close();
+                    inputStream.close();
                 }
             }
         } catch (Exception e){
@@ -352,7 +434,29 @@ public class Controller implements Initializable {
     }
 
     public void give_back(Book book_check){
-
+        try {
+            InputStream inputStream = new BufferedInputStream(new FileInputStream("src/data/Borrow/Data" + book_check.getID() + ".txt"));
+            OutputStream outputStream = new BufferedOutputStream(new FileOutputStream("src/data/History/Data" + book_check.getID() + ".txt"));
+            byte[] buffer = new byte[1024];
+            int lengthRead;
+            while ((lengthRead = inputStream.read(buffer)) > 0){
+                outputStream.write(buffer, 0, lengthRead);
+                outputStream.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        File from = new File("src/data/Borrow/Data" + book_check.getID() + ".txt");
+        from.exists();
+        from.delete();
+        try {
+            FileOutputStream fos = new FileOutputStream(from);
+            System.out.print("File was opened");
+            // -> file was closed
+        } catch(IOException e) {
+            // -> file still open
+            System.out.print("File was not opened");
+        }
     }
 
     private List<Book> searchBook(String search_text){
