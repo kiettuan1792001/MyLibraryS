@@ -32,6 +32,8 @@ public class CardDetailController implements Initializable {
     private Label detailDetail;
     @FXML
     public Button borrow;
+    @FXML
+    public Button love;
     private Book bookSelected;
     public List<Book> book_borrowed;
 
@@ -46,6 +48,13 @@ public class CardDetailController implements Initializable {
         for (Book book_check : check) {
             if (bookSelected.getID() == book_check.getID()) {
                 borrow.setText("Trả sách");
+            }
+        }
+        Controller controller2 = new Controller();
+        List<Book> check2 = controller2.book_loved();
+        for (Book book_check : check2) {
+            if (bookSelected.getID() == book_check.getID()) {
+                love.setText("Bỏ yêu thích");
             }
         }
     }
@@ -74,6 +83,20 @@ public class CardDetailController implements Initializable {
 //                borrowed = true;
 //            }
 //        }
+    }
+    @FXML
+    void love(ActionEvent event){
+        if (love.getText().equals("Yêu thích")) {
+            love.setText("Bỏ yêu thích");
+            Controller controller = new Controller();
+            controller.recentlyAdded = controller.recentlyAdded();
+            controller.addLove(bookSelected);
+        } else {
+            love.setText("Yêu thích");
+            Controller controller = new Controller();
+            controller.recentlyAdded = controller.recentlyAdded();
+            controller.remove_love(bookSelected);
+        }
     }
     @FXML
     void back(ActionEvent event) {

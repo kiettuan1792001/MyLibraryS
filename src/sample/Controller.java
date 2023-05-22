@@ -33,7 +33,7 @@ public class Controller implements Initializable {
     private HBox cardsearch;
     public List<Book> recentlyAdded;
     public List<Book> borrowed;
-    private List<Book> Loved;
+    private List<Book> loved;
     private List<Book> history;
     private List<Book> book_result;
     String text;
@@ -110,8 +110,25 @@ public class Controller implements Initializable {
     }
     @FXML
     private void love(MouseEvent event){
-        loadPage("love");
+        loved = new ArrayList<>(book_loved());
+        System.out.println(loved.size());
+        cardLayout.getChildren().clear();
+        try {
+            for (int i=0; i < loved.size(); i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("cardML.fxml"));
+                HBox cardBox = fxmlLoader.load();
+                CardController cardController = fxmlLoader.getController();
+                cardController.setData(loved.get(i));
+                cardLayout.getChildren().add(cardBox);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        bp.setCenter(vbox);
+        label.setText("Sách yêu thích của tôi");
         classify.setValue("Tất cả");
+        scroll_book.setVisible(true);
     }
     @FXML
     private void history(MouseEvent event){
@@ -459,6 +476,92 @@ public class Controller implements Initializable {
         }
     }
 
+    public void addLove(Book book_check) {
+        try{
+            for (Book book : recentlyAdded){
+                if (book_check.getID() == book.getID()){
+                    int index = recentlyAdded.indexOf(book) + 1;
+                    InputStream inputStream = new BufferedInputStream(new FileInputStream("src/data/Raw/Data" + index + ".txt"));
+                    OutputStream outputStream = new BufferedOutputStream(new FileOutputStream("src/data/Love/Data" + index + ".txt"));
+                    byte[] buffer = new byte[1024];
+                    int lengthRead;
+                    while ((lengthRead = inputStream.read(buffer)) > 0){
+                        outputStream.write(buffer, 0, lengthRead);
+                        outputStream.flush();
+                    }
+                    outputStream.close();
+                    inputStream.close();
+                }
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    public void remove_love(Book book_check){
+        try {
+            File from = new File("src/data/Love/Data" + book_check.getID() + ".txt");
+            from.exists();
+            from.delete();
+            FileOutputStream fos = new FileOutputStream(from);
+        } catch(IOException e) {
+        }
+    }
+    public List<Book> book_loved(){
+        List<Book> books = new ArrayList<>();
+        try {
+            File path = new File("src/data/Love");
+            File[] file_list = path.listFiles();
+            int index;
+            Book book = new Book();
+            int check = 0;
+            for (File file : file_list){
+                index = Integer.parseInt(file.getName().split("Data")[1].split(".txt")[0]);
+                if (check == 0) {
+                    book = new Book();
+                } else {
+                    check++;
+                }
+                book.setImageSrc("/img/0" + index + ".png");
+                File file_read = new File("src/data/Love/Data" + index + ".txt");
+                if(file_read.length() == 0){
+                    continue;
+                }
+                Scanner myReader = new Scanner(file_read);
+                int count = 0;
+                while (myReader.hasNextLine() == true) {
+                    count++;
+                    String data = myReader.nextLine();
+                    switch (count) {
+                        case 1:
+                            book.setName(data.split(": ", 2)[1]);
+                            break;
+                        case 2:
+                            book.setID(Integer.parseInt(data.split(": ", 2)[1]));
+                            break;
+                        case 3:
+                            book.setAuthor(data.split(": ", 2)[1]);
+                            break;
+                        case 4:
+                            book.setCategory(data.split(": ", 2)[1]);
+                            break;
+                        case 5:
+                            book.setDetails(data.split(": ", 2)[1]);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                books.add(book);
+                file.exists();
+            }
+            path.exists();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return books;
+    }
     private List<Book> searchBook(String search_text){
         List<Book> book_result = new ArrayList<>();
         for (Book book : recentlyAdded) {
